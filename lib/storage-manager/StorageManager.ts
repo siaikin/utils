@@ -4,7 +4,7 @@ import {WebStorage} from "./WebStorage";
 import {WeChatMiniprogramStorage} from "./WeChatMiniprogramStorage";
 
 class StorageManager {
-  private static STORAGE_KEY = 'JuphoonWebSDK_StorageManager';
+  private static STORAGE_KEY = 'SIAIKIN_StorageManager';
 
   storage: IStorage;
 

@@ -9,7 +9,7 @@
   "scripts": {
     "prepare": "husky install",
     "test": "jest",
-    "asd": "husky add .husky/pre-commit \"npm test\""
+    "docs": "typedoc lib/index.ts --out docs --readme USAGE.md"
   },
   "author": "siaikin",
   "license": "MIT",
@@ -20,6 +20,7 @@
     "husky": "^7.0.4",
     "jest": "^27.4.7",
     "ts-jest": "^27.1.3",
+    "typedoc": "^0.22.11",
     "typescript": "^4.5.5"
   },
   "dependencies": {

@@ -11,7 +11,7 @@ class StorageManager {
   constructor() {
     if (isBrowser) {
       this.storage = new WebStorage(StorageManager.STORAGE_KEY);
-    } else {
+    } else if (isWeChat) {
       this.storage = new WeChatMiniprogramStorage(StorageManager.STORAGE_KEY);
     }
   }

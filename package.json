@@ -1,7 +1,7 @@
 {
   "name": "@siaikin/utils",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "utils. event listener, type def and proxy manager etc.",
   "main": "dist/min/index.js",
   "typings": "types/index.d.ts",

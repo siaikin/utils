@@ -41,12 +41,13 @@ jobs:
         uses: codecov/codecov-action@v2.1.0
         with:
           directory: ./_coverage
+
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: npm install
-      - run: npm test
+      - run: npm run build
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}

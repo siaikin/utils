@@ -5,6 +5,8 @@ export const isBrowser = typeof window !== 'undefined';
 
 export const isWeChat = typeof wx !== 'undefined' && typeIsFalse(isBrowser);
 
+export const isNode = typeIsFalse(isBrowser) && typeIsFalse(isWeChat) && typeof global !== 'undefined';
+
 /**
  * 获取设备唯一Id
  */

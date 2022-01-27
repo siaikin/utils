@@ -4,6 +4,7 @@
   "version": "1.0.2",
   "description": "utils. event listener, type def and proxy manager etc.",
   "main": "dist/min/index.js",
+  "module": "dist/esm/index.js",
   "typings": "types/index.d.ts",
   "directories": {
     "test": "test"

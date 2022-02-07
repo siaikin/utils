@@ -121,7 +121,7 @@ export class EventTarget<T = never> implements IEventTarget<T> {
    * @return 事件是否发送成功
    */
   // dispatchEvent<R extends keyof T>(event: Event<T>): boolean {
-  dispatchEvent<D extends keyof T>(event: D extends 'error' ? IErrorEvent<T, D> : IEvent<T, D>): boolean {
+  dispatchEvent<D extends keyof T>(event: IEvent<T, D>): boolean {
   if (!notUAN(this.listenerMap[event.type])) this.listenerMap[event.type] = [];
     const arr: Array<IEventListenerObject<T, D>> = this.listenerMap[event.type];
 
@@ -130,7 +130,7 @@ export class EventTarget<T = never> implements IEventTarget<T> {
      * 使用tempArr遍历, 即使在循环中移除了监听器改变的是 `arr` 的下标, `tempArr` 不受影响.
      */
     const tempArr = arr.slice();
-    tempArr.forEach(funcObj => funcObj.listener(event, funcObj.removeSelf));
+    tempArr.forEach(funcObj => funcObj.listener(event as D extends 'error' ? IErrorEvent<T, D> : IEvent<T, D>, funcObj.removeSelf));
 
     if (typeIsString(event.type)) {
       const eventType = event.type;

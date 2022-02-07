@@ -29,7 +29,7 @@ export interface IEventTarget<T> {
   addEventListener<D extends keyof T>(type: D, func: EventListenerType<T, D>, options?: EventListenerOptions): () => void;
   addEventListeners<D extends keyof T>(types: Array<D>, func: EventListenerType<T, D>, options?: EventListenerOptions): () => void;
   removeEventListener<D extends keyof T>(type: D, func: EventListenerType<T, D>): boolean;
-  dispatchEvent<D extends keyof T>(event: D extends 'error' ? IErrorEvent<T, D> : IEvent<T, D>): boolean;
+  dispatchEvent<D extends keyof T>(event: IEvent<T, D>): boolean;
   dispatchEventLite<D extends keyof T>(type: D, message?: EventTargetData<GetEventListenerParametersType<T, D>>, error?: string): boolean;
   hasListener<D extends keyof T>(type: D): boolean;
   clearListener(): void;

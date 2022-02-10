@@ -10,6 +10,7 @@ export enum TYPE {
   Date = '[object Date]',
   Error = '[object Error]',
   Function = '[object Function]',
+  AsyncFunction = '[object AsyncFunction]',
   Number = '[object Number]',
   Null = '[object Null]',
   Math = '[object Math]',
@@ -99,10 +100,13 @@ export function notUAN<T>(variable: T): variable is NonNullable<T> {
 
 /**
  * 判断变量类型是否为{@link function}
+ *
+ * **注: [AsyncFunction](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction) 也被认为是一个 {@link function}**
+ *
  * @param variable
  */
 export function typeIsFunction(variable: unknown): variable is (...args: Array<unknown>) => unknown {
-  return typeIs(variable, TYPE.Function);
+  return typeIs(variable, TYPE.Function, TYPE.AsyncFunction);
 }
 
 /**

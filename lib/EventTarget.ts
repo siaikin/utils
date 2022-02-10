@@ -38,7 +38,7 @@ export class EventTarget<T = never> implements IEventTarget<T> {
   //   : () => void
   addEventListener<D extends keyof T>(type: D, func: EventListenerType<T, D>, options?: EventListenerOptions): () => void
   {
-    if (!typeIs(type, TYPE.String, TYPE.Number) || !typeIs(func, TYPE.Function)) throw new Error();
+    if (!typeIs(type, TYPE.String, TYPE.Number) || !typeIsFunction(func)) throw new Error();
 
     const removeSelf = () => this.removeEventListener(type, func);
 

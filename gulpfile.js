@@ -1,5 +1,4 @@
 const {series} = require('gulp');
-const path = require("path");
 const {exec} = require("child_process");
 
 function build() {
@@ -9,6 +8,14 @@ function build() {
     compileToUMD(),
   );
 }
+
+function test() {
+  return series(
+    unitTest('jest.config.browser.js'),
+    unitTest('jest.config.node.js'),
+  );
+}
+
 
 function generateTypes() {
   function func(cb) {
@@ -46,6 +53,20 @@ function compileToUMD() {
   return func;
 }
 
+function unitTest(configFile) {
+  function func(cb) {
+    exec(`jest --config ${configFile}`, (error, stdout, stderr) => {
+      cb(error);
+      console.error(stdout);
+    });
+  }
+
+  func.displayName = `unit test[${configFile}]`;
+
+  return func;
+}
+
 module.exports = {
-  default: build()
+  default: build(),
+  test: test()
 };

@@ -11,7 +11,7 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "test": "jest",
+    "test": "gulp test",
     "docs": "typedoc lib/index.ts --out docs --readme USAGE.md",
     "build": "gulp"
   },

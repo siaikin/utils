@@ -5,3 +5,4 @@ export * from './PlatformUtils';
 export * from './URLUtils';
 export * from './FunctionUtils';
 export * from './RegExpUtils';
+export * from './PerformanceUtils';

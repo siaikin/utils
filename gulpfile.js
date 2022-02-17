@@ -1,4 +1,4 @@
-const {series} = require('gulp');
+const {series, parallel} = require('gulp');
 const {exec} = require("child_process");
 
 function build() {
@@ -11,8 +11,7 @@ function build() {
 
 function test() {
   return series(
-    unitTest('jest.config.browser.js'),
-    unitTest('jest.config.node.js'),
+    unitTest('jest.config.browser.js')
   );
 }
 

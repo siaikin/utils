@@ -3,6 +3,8 @@ import {clearMarkPoint, measureMarkPoint, setMarkPoint} from "../../lib";
 describe('[file: PerformanceUtils.ts] usage case', function () {
 
 	describe('mark point measure usage case', function () {
+		jest.setTimeout(6000);
+
 		it('set mark points, calc execute time', async () => {
 			setMarkPoint('testMarkPoints', 0);
 			await new Promise(resolve => setTimeout(resolve, 1000));
@@ -25,9 +27,9 @@ describe('[file: PerformanceUtils.ts] usage case', function () {
 			setMarkPoint('testMarkPoints', 2);
 			await new Promise(resolve => setTimeout(resolve, 1000));
 			setMarkPoint('testMarkPoints', 3);
-			await new Promise(resolve => setTimeout(resolve, 1000));
+			await new Promise(resolve => setTimeout(resolve, 2000));
 			setMarkPoint('testMarkPoints', 2);
-			expect(Math.round(measureMarkPoint('testMarkPoints', 2, 3)[0])).toBeLessThanOrEqual(-1000);
+			expect(Math.round(measureMarkPoint('testMarkPoints', 2, 3)[0])).toBeLessThanOrEqual(-2000);
 		});
 	})
 });

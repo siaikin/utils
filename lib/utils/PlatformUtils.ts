@@ -1,11 +1,43 @@
-import {typeIsString, typeIsFalse} from "./TypeUtils";
+import {typeIsString, typeIsFalse, typeIsFunction} from "./TypeUtils";
 import {randomString} from "./RandomUtils";
+import 'worker_threads';
+
+declare const isMainThread: unknown;
 
 export const isBrowser = typeof window !== 'undefined';
 
 export const isWeChat = typeof wx !== 'undefined' && typeIsFalse(isBrowser);
 
 export const isNode = typeIsFalse(isBrowser) && typeIsFalse(isWeChat) && typeof global !== 'undefined';
+
+export enum EnvironmentType {
+  BROWSER,
+  BROWSER_WORKER,
+  WECHAT_MINIPROGRAM,
+  NODE,
+  NODE_THREAD,
+  UNKNOWN
+}
+
+export const environmentType: EnvironmentType = getEnvironmentType();
+
+function getEnvironmentType(): EnvironmentType {
+  const hasWindow = typeof window !== 'undefined' && typeof XMLHttpRequest !== 'undefined',
+        hasGlobal = typeof global !== 'undefined',
+        hasWx = typeof wx !== 'undefined' && typeIsFunction(wx.createLivePusherContext),
+        hasSelf = typeof self !== 'undefined',
+        _isMainThread = typeof isMainThread === 'boolean' ? isMainThread : false;
+  let _environmentType: EnvironmentType = EnvironmentType.UNKNOWN;
+
+  if (hasWindow && !hasGlobal && !hasWx) _environmentType = EnvironmentType.BROWSER;
+  else if (!hasWindow && !hasGlobal && !hasWx && hasSelf) _environmentType = EnvironmentType.BROWSER_WORKER;
+  else if (!hasWindow && hasGlobal && !hasWx && _isMainThread) _environmentType = EnvironmentType.NODE;
+  else if (!hasWindow && hasGlobal && !hasWx && !_isMainThread) _environmentType = EnvironmentType.NODE_THREAD;
+  else if (!hasWindow && !hasGlobal && hasWx) _environmentType = EnvironmentType.WECHAT_MINIPROGRAM;
+
+  console.log(_environmentType);
+  return _environmentType;
+}
 
 /**
  * 获取设备唯一Id

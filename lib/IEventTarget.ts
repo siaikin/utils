@@ -52,9 +52,6 @@ export interface IErrorEvent<T, D extends keyof T> extends IEvent<T, D> {
 
 export type GetEventListenerParametersType<T, R extends keyof T> = T[R] extends (...args: infer P) => unknown ? P[0] : never;
 
-export type GetEventListenerName<T extends string> = T extends `on${infer R}` ? R : T;
-
-
-export interface IEventListenerType {
+ export interface IEventListenerType {
   nothing(): void;
 }

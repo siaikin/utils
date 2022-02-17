@@ -1,6 +1,7 @@
 import {Reportable} from "../reporter-manager";
 import {IProxyManager} from "./IProxyManager";
-import {TYPE, typeIsFunction, typeOf} from "../utils";
+import {randomNumber, TYPE, typeIsFunction, typeOf} from "../utils";
+import {clearMarkPoint, measureMarkPoint, setMarkPoint} from "../utils";
 
 export class ProxyManager<T extends Reportable> extends Reportable implements IProxyManager<T> {
   private static _handleConcatParametersType(variable: unknown, index: number, variableType: string = typeOf(variable)): string {
@@ -131,9 +132,12 @@ export class ProxyManager<T extends Reportable> extends Reportable implements IP
       }
     } else {
       result = (...args: Array<unknown>) => {
-        const len = args.length;
+        const len = args.length,
+              markName = '_handleGetFunction',
+              startPointId = randomNumber(Number.MAX_SAFE_INTEGER),
+              endPointId = startPointId + 1;
         let beforeApplyFormatStr = '[%s] ',
-          afterApplyFormatStr = '[%s] ';
+            afterApplyFormatStr = '[%s] ';
 
         //  打印入参
         for (let i = 0; i < len; i++) {
@@ -141,26 +145,30 @@ export class ProxyManager<T extends Reportable> extends Reportable implements IP
         }
         target.reporter.debug(beforeApplyFormatStr, p, ...args);
 
+        setMarkPoint(markName, startPointId);
         let funcReturnValue = Reflect.apply(target[p], target, args);
-        const returnValueType = typeOf(funcReturnValue);
+        setMarkPoint(markName, endPointId);
+        const returnValueType = typeOf(funcReturnValue),
+              duration = measureMarkPoint(markName, startPointId, endPointId)[0];
+        clearMarkPoint(markName, startPointId, endPointId);
 
         //  处理返回值
         switch (returnValueType) {
           case TYPE.Promise:
             funcReturnValue = funcReturnValue
               .then((data) => {
-                afterApplyFormatStr += `ret.${ProxyManager._handleConcatParametersType(data, 0)}`;
+                afterApplyFormatStr += `ret(${duration}ms).${ProxyManager._handleConcatParametersType(data, 0)}`;
                 target.reporter.debug(afterApplyFormatStr, p, data);
                 return data;
               })
               .catch((reason) => {
-                afterApplyFormatStr += `throw.${ProxyManager._handleConcatParametersType(reason, 0)}`;
+                afterApplyFormatStr += `throw(${duration}ms).${ProxyManager._handleConcatParametersType(reason, 0)}`;
                 target.reporter.error(afterApplyFormatStr, p, reason.toString());
                 return Promise.reject(reason);
               });
             break;
           default:
-            afterApplyFormatStr += `ret.${ProxyManager._handleConcatParametersType(funcReturnValue, 0, returnValueType)}`;
+            afterApplyFormatStr += `ret(${duration}ms).${ProxyManager._handleConcatParametersType(funcReturnValue, 0, returnValueType)}`;
             target.reporter.debug(afterApplyFormatStr, p, funcReturnValue);
         }
 

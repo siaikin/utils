@@ -1,8 +1,6 @@
 import {typeIsString, typeIsFalse, typeIsFunction} from "./TypeUtils";
 import {randomString} from "./RandomUtils";
-import 'worker_threads';
-
-declare const isMainThread: unknown;
+import * as worker_threads from 'worker_threads';
 
 export const isBrowser = typeof window !== 'undefined';
 
@@ -26,7 +24,7 @@ function getEnvironmentType(): EnvironmentType {
         hasGlobal = typeof global !== 'undefined',
         hasWx = typeof wx !== 'undefined' && typeIsFunction(wx.createLivePusherContext),
         hasSelf = typeof self !== 'undefined',
-        _isMainThread = typeof isMainThread === 'boolean' ? isMainThread : false;
+        _isMainThread = typeof worker_threads.isMainThread === 'boolean' ? worker_threads.isMainThread : false;
   let _environmentType: EnvironmentType = EnvironmentType.UNKNOWN;
 
   if (hasWindow && !hasGlobal && !hasWx) _environmentType = EnvironmentType.BROWSER;
@@ -35,7 +33,6 @@ function getEnvironmentType(): EnvironmentType {
   else if (!hasWindow && hasGlobal && !hasWx && !_isMainThread) _environmentType = EnvironmentType.NODE_THREAD;
   else if (!hasWindow && !hasGlobal && hasWx) _environmentType = EnvironmentType.WECHAT_MINIPROGRAM;
 
-  console.log(_environmentType);
   return _environmentType;
 }
 

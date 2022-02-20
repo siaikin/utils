@@ -29,7 +29,7 @@ describe('[file: PerformanceUtils.ts] usage case', function () {
 			setMarkPoint('testMarkPoints', 3);
 			await new Promise(resolve => setTimeout(resolve, 2000));
 			setMarkPoint('testMarkPoints', 2);
-			expect(Math.round(measureMarkPoint('testMarkPoints', 2, 3)[0])).toBeLessThanOrEqual(-2000);
+			expect(Math.abs(measureMarkPoint('testMarkPoints', 2, 3)[0])).toBeGreaterThanOrEqual(-2000);
 		});
 	})
 });

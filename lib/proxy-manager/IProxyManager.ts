@@ -1,4 +1,4 @@
-import {Reportable} from "../reporter-manager";
+import {Reportable} from '../reporter-manager';
 
 export interface IProxyManager<T extends Reportable> {
   proxy(instance: T): void;

@@ -1,6 +1,6 @@
-import {AllowDataType} from "./IStorage";
-import {typeIsObject} from "../utils";
-import {WebStorage} from "./WebStorage";
+import {AllowDataType} from './IStorage';
+import {typeIsObject} from '../utils';
+import {WebStorage} from './WebStorage';
 
 export class WeChatMiniprogramStorage extends WebStorage {
   cache: Record<string | number, AllowDataType>;

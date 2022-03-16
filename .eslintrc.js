@@ -15,11 +15,16 @@ module.exports = {
   ],
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended'
+    'plugin:@typescript-eslint/recommended',
+    'plugin:jest/all',
   ],
   rules: {
     'no-case-declarations': 'off',
-    '@typescript-eslint/no-namespace': 'off'
+    '@typescript-eslint/no-namespace': 'off',
+    'quotes': ['error', 'single'],
+    'jest/no-commented-out-tests': 'off',
+    'jest/require-to-throw-message': 'off'
   },
-  ignorePatterns: ['**/output/**', '**/node_modules/**', '**/*.js']
+  ignorePatterns: ['**/output/**', '**/node_modules/**', '**/*.js'],
+
 };

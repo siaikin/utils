@@ -1,5 +1,5 @@
-import {typeIsFunction, typeIsString} from "../utils";
-import {StateMachineTranslation} from "./StateMachine";
+import {typeIsFunction, typeIsString} from '../utils';
+import {StateMachineTranslation} from './StateMachine';
 
 /**
  * 配置stateMachine
@@ -22,7 +22,7 @@ export function StateMachineAutoConfig(init: string): ClassDecorator {
  * @param progress 如接口为异步返回, 该值表示接口执行过操中应当为什么状态
  */
 export function stateMachineTranslation(from: Array<string>, to?: string, progress?: string) {
-  return (target: unknown, propertyKey: string, descriptor: PropertyDescriptor): void => {
+  return (target: unknown, propertyKey: string): void => {
     if (typeof target !== 'object' || !target) return;
     if (!typeIsFunction(target.constructor)) return;
 

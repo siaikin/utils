@@ -1,11 +1,11 @@
-import {notUAN, TYPE, typeIs, typeIsArray, typeIsFunction, typeIsString, typeIsTrue} from "./utils";
+import {notUAN, TYPE, typeIs, typeIsArray, typeIsFunction, typeIsString, typeIsTrue} from './utils';
 import {
   EventListenerType,
   IEventTarget,
   EventListenerOptions,
   EventTargetData,
   IEvent, IErrorEvent, IEventListenerObject, GetEventListenerParametersType
-} from "./IEventTarget";
+} from './IEventTarget';
 
 /**
  * EventTarget实现了基本的事件触发机制

@@ -1,9 +1,9 @@
-import {isBrowser, timeString, typeIsNumber, typeIsTrue} from "../utils";
-import {EventTarget} from "../EventTarget";
-import {Reporter} from "../reporter";
-import {LoggerLevel} from "../reporter";
-import {IReporterManager, LogInfo} from "./IReporterManager";
-import {ReporterManagerEventType} from "./ReporterManagerEventType";
+import {isBrowser, timeString, typeIsNumber, typeIsTrue} from '../utils';
+import {EventTarget} from '../EventTarget';
+import {Reporter} from '../reporter';
+import {LoggerLevel} from '../reporter';
+import {IReporterManager, LogInfo} from './IReporterManager';
+import {ReporterManagerEventType} from './ReporterManagerEventType';
 
 export class ReporterManager extends EventTarget implements IReporterManager {
   static LOGGER_LEVEL_COLOR: Record<LoggerLevel, string> = {

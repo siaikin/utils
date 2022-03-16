@@ -1,7 +1,7 @@
-import {Reportable} from "../reporter-manager";
-import {IProxyManager} from "./IProxyManager";
-import {randomNumber, TYPE, typeIsFunction, typeOf} from "../utils";
-import {clearMarkPoint, measureMarkPoint, setMarkPoint} from "../utils";
+import {Reportable} from '../reporter-manager';
+import {IProxyManager} from './IProxyManager';
+import {randomNumber, TYPE, typeIsFunction, typeOf} from '../utils';
+import {clearMarkPoint, measureMarkPoint, setMarkPoint} from '../utils';
 
 export class ProxyManager<T extends Reportable> extends Reportable implements IProxyManager<T> {
   private static _handleConcatParametersType(variable: unknown, index: number, variableType: string = typeOf(variable)): string {

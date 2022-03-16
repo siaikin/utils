@@ -1,4 +1,4 @@
-import {Reportable} from "../reporter-manager";
+import {Reportable} from '../reporter-manager';
 
 export class Constructable extends Reportable {
   /**

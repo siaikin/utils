@@ -1,5 +1,5 @@
-import {Reporter} from "../Reporter";
-import {isBrowser, notUAN} from "../../utils/index";
+import {Reporter} from '../Reporter';
+import {isBrowser, notUAN} from '../../utils/index';
 
 export class ErrorListenPlugin {
   static reporter = new Reporter('ErrorListenPlugin');

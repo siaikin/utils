@@ -1,6 +1,6 @@
-import {Reporter} from "../reporter";
-import {EventTarget} from "../EventTarget";
-import {ReporterManager, ReporterManagerInstance} from "./ReporterManager";
+import {Reporter} from '../reporter';
+import {EventTarget} from '../EventTarget';
+import {ReporterManager, ReporterManagerInstance} from './ReporterManager';
 
 export class Reportable<T = never> extends EventTarget<T> {
   static IGNORE_FUNCTION_MEMBER: Array<PropertyKey> = ['toString', 'addEventListener', 'toJSON'];

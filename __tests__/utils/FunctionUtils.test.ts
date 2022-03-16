@@ -1,8 +1,10 @@
-import {deepMerge, throttle} from "../../lib";
+import {deepMerge, throttle} from '../../lib';
 
 describe('[class: FunctionUtils] usage case', function () {
   describe('test [function: throttle] usage case', function () {
-    it('when the length <= 0 should return empty string', (cb) => {
+    it('when the length <= 0 should return empty string', async () => {
+      expect.hasAssertions();
+
       jest.setTimeout(2500);
       const
         func = jest.fn(),
@@ -13,15 +15,15 @@ describe('[class: FunctionUtils] usage case', function () {
         wrapFunc();
       }, 200);
 
-      setTimeout(() => {
-        expect(func).toHaveBeenCalledTimes(3);
-        cb();
-      }, 2500);
+      await new Promise((resolve) => setTimeout(resolve, 2500));
+      expect(func).toHaveBeenCalledTimes(3);
     })
   });
 
   describe('test [function: deepMerge] usage case', function () {
-    it('', () => {
+    it('a', () => {
+      expect.hasAssertions();
+
       const A = {
           firstLayer: {secondLayer: 1}
         },

@@ -1,4 +1,4 @@
-import {Reportable} from "../../lib";
+import {Reportable} from '../../lib';
 
 describe('[class: Reportable] usage case', function () {
   class BaseTestClass extends Reportable {
@@ -57,8 +57,10 @@ describe('[class: Reportable] usage case', function () {
   /**
    * 测试Reportable的instanceName收集功能
    */
-  describe('L1IT_CollectInstanceName', function () {
+  describe('l1IT_CollectInstanceName', function () {
     it('test collect instance name', async () => {
+      expect.hasAssertions();
+
       const test = new Test();
 
       await new Promise((resolve) => setTimeout(resolve, 100));
@@ -89,8 +91,10 @@ describe('[class: Reportable] usage case', function () {
     })
   });
 
-  describe('L1IT_CollectInstanceName_Abnormal', function () {
+  describe('l1IT_CollectInstanceName_Abnormal', function () {
     it('test collect instance name abnormal', async () => {
+      expect.hasAssertions();
+
       class AbnormalTest extends Test {
         addExistInstanceName(): void {
           this.addReportableInstance(this.syncInst);
@@ -120,11 +124,13 @@ describe('[class: Reportable] usage case', function () {
   /**
    * 测试{@link Reportable.toString}接口
    */
-  describe('L4UT_InvokeToString', function () {
+  describe('l4UT_InvokeToString', function () {
     it('should return [object ClassName]', function () {
+      expect.hasAssertions();
+
       const test = new Test();
 
-      expect(test.toString()).toEqual('[object Test]');
+      expect(test.toString()).toBe('[object Test]');
     });
   });
 })

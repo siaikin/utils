@@ -1,4 +1,4 @@
-import {isBrowser, isWeChat} from "./PlatformUtils";
+import {isBrowser, isWeChat} from './PlatformUtils';
 
 export function sizeOf(str: string): number {
   str = str.toString();

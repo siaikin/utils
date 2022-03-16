@@ -1,5 +1,5 @@
-import {AllowDataType, IStorage} from "./IStorage";
-import {notUAN, typeIsObject, typeIsString} from "../utils";
+import {AllowDataType, IStorage} from './IStorage';
+import {notUAN, typeIsString} from '../utils';
 
 export class WebStorage implements IStorage {
   cache: Record<string | number, AllowDataType>;

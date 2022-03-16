@@ -174,7 +174,7 @@ export function typeIsThrowMulti(variableParameterArr: Array<[unknown, ...Array<
     error: {} as Error
   };
 
-  for (let i = variableParameterArr.length, variableParameter: [unknown, ...Array<TYPE>], result: unknown; i--, variableParameter = variableParameterArr[i];) {
+  for (let i = variableParameterArr.length, variableParameter: [unknown, ...Array<TYPE>]; i--, variableParameter = variableParameterArr[i];) {
     try {
       typeIsThrow(...variableParameter);
     } catch (e) {

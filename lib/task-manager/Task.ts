@@ -1,7 +1,8 @@
-import {TaskFunction, TaskOptions} from "./ITaskManager";
-import {randomString} from "../utils";
+import {TaskFunction, TaskOptions} from './ITaskManager';
+import {randomString} from '../utils';
 
-const nothing: TaskFunction = (taskL: Task) => {return;};
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const nothing: TaskFunction = (task: Task) => {return;};
 
 export class Task {
   private static DEFAULT_TASK_OPTIONS: TaskOptions = {
@@ -59,7 +60,7 @@ export class Task {
     return executable;
   }
 
-  executeTask() {
+  executeTask(): void {
     this.options.func(this);
   }
 }

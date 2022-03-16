@@ -1,4 +1,4 @@
-import {Task} from "./Task";
+import {Task} from './Task';
 
 export type TaskFunction = (task: Task) => unknown;
 

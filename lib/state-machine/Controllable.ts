@@ -1,6 +1,6 @@
-import {Reportable} from "../reporter-manager";
-import {StateMachine, StateMachineTranslation} from "./StateMachine";
-import {notUAN, typeIsArray, typeIsString, typeIsTrue} from "../utils";
+import {Reportable} from '../reporter-manager';
+import {StateMachine, StateMachineTranslation} from './StateMachine';
+import {notUAN, typeIsArray, typeIsString, typeIsTrue} from '../utils';
 
 export class Controllable<T = never> extends Reportable<T> {
   /**

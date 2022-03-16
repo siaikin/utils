@@ -1,4 +1,4 @@
-import {typeIsArray, typeIsString} from "../utils";
+import {typeIsString} from '../utils';
 
 export class Graph {
   vertexSet: Set<string>;

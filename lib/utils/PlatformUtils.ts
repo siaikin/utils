@@ -1,5 +1,5 @@
-import {typeIsString, typeIsFalse, typeIsFunction} from "./TypeUtils";
-import {randomString} from "./RandomUtils";
+import {typeIsString, typeIsFalse, typeIsFunction} from './TypeUtils';
+import {randomString} from './RandomUtils';
 import * as worker_threads from 'worker_threads';
 
 export const isBrowser = typeof window !== 'undefined';
@@ -61,9 +61,9 @@ export function generateDeviceId(): string {
 
 export function timeString(): string {
   const now = new Date(),
-        y = now.getFullYear(),
-        m = now.getMonth() + 1,
-        d = now.getDate(),
+        // y = now.getFullYear(),
+        // m = now.getMonth() + 1,
+        // d = now.getDate(),
         h = now.getHours(),
         M = now.getMinutes(),
         s = now.getSeconds(),

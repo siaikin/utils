@@ -1,8 +1,10 @@
-import {ProxyManagerInstance, Reportable} from "../../lib";
+import {ProxyManagerInstance, Reportable} from '../../lib';
 
 describe('[class: ProxyManager] usage case', function () {
   describe('test [function: proxy] usage case', function () {
     it('input instance of class Object should throw error', () => {
+      expect.hasAssertions();
+
       const instance = {};
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -12,12 +14,16 @@ describe('[class: ProxyManager] usage case', function () {
     })
 
     it('input instance of class [Reportable] should return a [Proxy] instance', () => {
+      expect.hasAssertions();
+
       const instance = ProxyManagerInstance.proxy(new Reportable());
 
-      expect(instance instanceof Reportable && ProxyManagerInstance.proxied(instance)).toBe(true);
+      expect(instance instanceof Reportable).toBe(ProxyManagerInstance.proxied(instance));
     })
 
-    it('proxied object works same way with origin object', () => {
+    it('proxied object works same way with origin object', async () => {
+      expect.hasAssertions();
+
       // expect.assertions(4);
       class ProxiedObject extends Reportable {
         memberOne = 'memberOne';
@@ -36,12 +42,15 @@ describe('[class: ProxyManager] usage case', function () {
 
       expect(instance.memberOne).toBe('memberOne');
       expect(instance.functionOne()).toBe('this function one');
-      return Promise.all([expect(instance.functionThree()).rejects.toMatch('normal error'), expect(instance.functionTwo()).resolves.toBeUndefined()]);
+
+      await Promise.all([expect(instance.functionThree()).rejects.toMatch('normal error'), expect(instance.functionTwo()).resolves.toBeUndefined()]);
     })
   });
 
   describe('test [function: proxyClass] usage case', function () {
     it('input class not inherit [Reportable] should throw error', () => {
+      expect.hasAssertions();
+
       const instance = class A {};
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -51,9 +60,11 @@ describe('[class: ProxyManager] usage case', function () {
     })
 
     it('input class inherit [Reportable] should return  a [Proxy] instance', () => {
+      expect.hasAssertions();
+
       const instance = ProxyManagerInstance.proxyClass(class A extends Reportable {});
 
-      expect(instance.prototype instanceof Reportable && ProxyManagerInstance.proxied(instance)).toBe(true);
+      expect(instance.prototype instanceof Reportable).toBe(ProxyManagerInstance.proxied(instance));
     })
   });
 });

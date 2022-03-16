@@ -1,4 +1,4 @@
-import {notUAN, TYPE, typeIsFalse, typeIsThrowMulti} from "./TypeUtils";
+import {notUAN, TYPE, typeIsFalse, typeIsThrowMulti} from './TypeUtils';
 
 export enum RExpression {
   NUMBER_AND_LETTER = '^[0-9A-Za-z]*$',

@@ -1,7 +1,7 @@
-import {AllowDataType, IStorage} from "./IStorage";
-import {isBrowser, isWeChat, notUAN} from "../utils";
-import {WebStorage} from "./WebStorage";
-import {WeChatMiniprogramStorage} from "./WeChatMiniprogramStorage";
+import {AllowDataType, IStorage} from './IStorage';
+import {isBrowser, isWeChat} from '../utils';
+import {WebStorage} from './WebStorage';
+import {WeChatMiniprogramStorage} from './WeChatMiniprogramStorage';
 
 class StorageManager {
   private static STORAGE_KEY = 'SIAIKIN_StorageManager';

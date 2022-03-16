@@ -1,6 +1,6 @@
 import {format} from 'format';
-import {notUAN, typeIsNumber, typeIsString} from "../utils";
-import {LoggerLevel} from "./LoggerLevel";
+import {notUAN, typeIsNumber, typeIsString} from '../utils';
+import {LoggerLevel} from './LoggerLevel';
 
 export class Reporter {
   _level: LoggerLevel;
@@ -138,6 +138,7 @@ export class Reporter {
    * @param formatStr - 格式化字符串
    * @param args - 格式化参数
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onlog(logStr: string, level: LoggerLevel, className: string, instanceName: string, formatStr: string, ...args: Array<unknown>): void {
     // const str = [
     //   `${timeString()}\t%c[${LoggerLevel[level]}]`,

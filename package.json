@@ -13,7 +13,8 @@
     "prepare": "husky install",
     "test": "gulp test",
     "docs": "typedoc lib/index.ts --out docs --readme USAGE.md",
-    "build": "gulp"
+    "build": "gulp",
+    "lint": "eslint . --config .eslintrc.js"
   },
   "author": "siaikin",
   "files": [
@@ -43,6 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
     "codecov": "^3.8.3",
+    "eslint-plugin-jest": "^26.1.1",
     "gulp": "^4.0.2",
     "husky": "^7.0.4",
     "jest": "^27.4.7",

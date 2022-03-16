@@ -5,45 +5,61 @@ import {
   typeIsNumber,
   typeIsString, typeIsThrow, typeIsThrowMulti,
   typeIsTrue
-} from "../../lib";
+} from '../../lib';
 
 describe('[class: TypeUtils] usage case', function () {
   describe('test [function: typeIsString] usage case', function () {
     it('input empty string should return false', () => {
+      expect.hasAssertions();
+
       expect(typeIsString('')).toBe(false);
     })
 
     it('input empty string and allow null should return true', () => {
+      expect.hasAssertions();
+
       expect(typeIsString('', false)).toBe(true);
     })
   });
 
   describe('test [function: typeIsNumber] usage case', function () {
     it('input NaN should return false', () => {
+      expect.hasAssertions();
+
       expect(typeIsNumber(NaN)).toBe(false);
     })
 
     it('input NaN and allow NaN should return true', () => {
+      expect.hasAssertions();
+
       expect(typeIsNumber(NaN, false)).toBe(true);
     })
   });
 
   describe('test [function: notUAN] usage case', function () {
     it('input [undefined] should return false', () => {
+      expect.hasAssertions();
+
       expect(notUAN(undefined)).toBe(false);
     })
 
     it('input [null] should return false', () => {
+      expect.hasAssertions();
+
       expect(notUAN(null)).toBe(false);
     })
   });
 
   describe('test [function: typeIsFunction] usage case', function () {
     it('input a arrow function should return true', () => {
+      expect.hasAssertions();
+
       expect(typeIsFunction(() => undefined)).toBe(true);
     })
 
     it('input a function should return true', () => {
+      expect.hasAssertions();
+
       expect(typeIsFunction(function _() { return undefined })).toBe(true);
     })
   });
@@ -53,12 +69,12 @@ describe('[class: TypeUtils] usage case', function () {
      * what is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)
      */
     it('input a falsy value (expect [false]) should return false', () => {
+      expect.hasAssertions();
+
       expect(typeIsFalse(0)).toBe(false);
       expect(typeIsFalse(-0)).toBe(false);
       // expect(typeIsFalse(0n)).toBe(false);
       expect(typeIsFalse('')).toBe(false);
-      expect(typeIsFalse("")).toBe(false);
-      expect(typeIsFalse(``)).toBe(false);
       expect(typeIsFalse(null)).toBe(false);
       expect(typeIsFalse(undefined)).toBe(false);
       expect(typeIsFalse(NaN)).toBe(false);
@@ -66,6 +82,8 @@ describe('[class: TypeUtils] usage case', function () {
     })
 
     it('input [false] should return true', () => {
+      expect.hasAssertions();
+
       expect(typeIsFalse(false)).toBe(true);
     })
   });
@@ -75,6 +93,8 @@ describe('[class: TypeUtils] usage case', function () {
      * what is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)
      */
     it('input a falsy value (expect [true]) should return false', () => {
+      expect.hasAssertions();
+
       expect(typeIsTrue({})).toBe(false);
       expect(typeIsTrue([])).toBe(false);
       expect(typeIsTrue(1)).toBe(false);
@@ -83,6 +103,8 @@ describe('[class: TypeUtils] usage case', function () {
     })
 
     it('input [true] should return true', () => {
+      expect.hasAssertions();
+
       expect(typeIsTrue(true)).toBe(true);
     })
   });
@@ -103,6 +125,8 @@ describe('[class: TypeUtils] usage case', function () {
      * what is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)
      */
     it('input a falsy value (expect [true]) should return false', () => {
+      expect.hasAssertions();
+
       expect(typeIsTrue({})).toBe(false);
       expect(typeIsTrue([])).toBe(false);
       expect(typeIsTrue(1)).toBe(false);
@@ -111,44 +135,60 @@ describe('[class: TypeUtils] usage case', function () {
     })
 
     it('input [true] should return true', () => {
+      expect.hasAssertions();
+
       expect(typeIsTrue(true)).toBe(true);
     })
   });
 
   describe('test [function: typeIsArray] usage case', function () {
     it('input Array should return true', () => {
+      expect.hasAssertions();
+
       expect(typeIsArray([])).toBe(true);
     })
   });
 
   describe('test [function: typeIsDate] usage case', function () {
     it('input a invalid [Date] object should return true', () => {
+      expect.hasAssertions();
+
       expect(typeIsDate(new Date(''))).toBe(true);
     })
 
     it('input a invalid [Date] object and enable valid should return false', () => {
+      expect.hasAssertions();
+
       expect(typeIsDate(new Date(''), true)).toBe(false);
     })
   });
 
   describe('test [function: typeIsThrow] usage case', function () {
     it('input a false type value should throw error', () => {
+      expect.hasAssertions();
+
       expect(() => typeIsThrow('a string value', TYPE.Number)).toThrow();
     })
 
     it('input a right type value should return true', () => {
+      expect.hasAssertions();
+
       expect(typeIsThrow('a string value', TYPE.String)).toBe(true);
     })
   });
 
   describe('test [function: typeIsThrowMulti] usage case', function () {
     it('input value not a [Array] should throw error', () => {
+      expect.hasAssertions();
+
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       expect(() => typeIsThrowMulti('')).toThrow();
     })
 
     it('if multiple false value input, error throw only the last false value', () => {
+      expect.hasAssertions();
+
       expect(() => {
         throw typeIsThrowMulti([
           ['first error', TYPE.Number],

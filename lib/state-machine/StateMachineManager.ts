@@ -1,6 +1,6 @@
-import {ProxyManager} from "../proxy-manager";
-import {Controllable} from "./Controllable";
-import {TYPE, typeOf} from "../utils";
+import {ProxyManager} from '../proxy-manager';
+import {Controllable} from './Controllable';
+import {typeIsPromise} from '../utils';
 
 export class StateMachineManager<T extends Controllable> extends ProxyManager<T> {
   constructor() {
@@ -35,24 +35,21 @@ export class StateMachineManager<T extends Controllable> extends ProxyManager<T>
             stateMachine.translate(name);
           }
 
-          let _result: any = super._handleGetFunction(target, p)(...args);
-          const returnValueType = typeOf(_result);
+          let _result = super._handleGetFunction(target, p)(...args);
 
-          switch (returnValueType) {
-            case TYPE.Promise:
-              _result = _result
-                .then((data) => {
-                  stateMachine.translate(progressResultTranslationName);
-                  return data;
-                })
-                .catch((reason) => {
-                  //  出现异常回退状态
-                  stateMachine.currentState = oldState;
-                  return Promise.reject(reason);
-                });
-              break;
-            default:
-              stateMachine.translate(progressResultTranslationName);
+          if (typeIsPromise(_result)) {
+            _result = _result
+              .then((data) => {
+                stateMachine.translate(progressResultTranslationName);
+                return data;
+              })
+              .catch((reason) => {
+                //  出现异常回退状态
+                stateMachine.currentState = oldState;
+                return Promise.reject(reason);
+              });
+          } else {
+            stateMachine.translate(progressResultTranslationName);
           }
 
           return _result;

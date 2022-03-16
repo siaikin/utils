@@ -1,4 +1,4 @@
-import {Reporter, LoggerLevel} from "../reporter";
+import {Reporter, LoggerLevel} from '../reporter';
 
 export interface IReporterManager {
   createReporter(className: string, instanceName?: string, level?: LoggerLevel): Reporter;

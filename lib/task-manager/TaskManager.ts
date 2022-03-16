@@ -1,7 +1,7 @@
-import {Task} from "./Task";
-import {TaskOptions, TaskFunction} from "./ITaskManager";
+import {Task} from './Task';
+import {TaskOptions, TaskFunction} from './ITaskManager';
 
-class TaskManager {
+export class TaskManager {
   private readonly _grained: number;
   private readonly _waitingQueue: Array<Task>
   private _lastLoopTimestamp: number;
@@ -60,6 +60,3 @@ class TaskManager {
     return true;
   }
 }
-
-export const TaskManagerInstance = new TaskManager();
-TaskManagerInstance.start();

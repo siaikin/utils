@@ -1,5 +1,5 @@
-import {EnvironmentType, environmentType} from "./PlatformUtils";
-import {typeIsFunction, typeIsNumber} from "./TypeUtils";
+import {EnvironmentType, environmentType} from './PlatformUtils';
+import {typeIsFunction, typeIsNumber} from './TypeUtils';
 import {performance} from 'perf_hooks';
 
 const markPointMap: Map<string, Record<number, number>> = new Map<string, Record<number, number>>();

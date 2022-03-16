@@ -1,4 +1,4 @@
-import {notUAN, TYPE, typeIsFunction, typeIsNumber, typeIsObject, typeOf} from "./TypeUtils";
+import {notUAN, TYPE, typeIsFunction, typeIsNumber, typeIsObject, typeOf} from './TypeUtils';
 
 /**
  * @param target
@@ -100,8 +100,7 @@ export function throttle(func: (...args: Array<unknown>) => unknown, interval = 
     func.apply(this, args);
   }
 
-  let timeoutKey: ReturnType<typeof setTimeout> | undefined,
-      last = 0;
+  let last = 0;
 
   return function (...args: Array<unknown>): void {
     const ts = Date.now();

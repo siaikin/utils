@@ -1,5 +1,5 @@
-import {Edge, Graph} from "./Graph";
-import {notUAN, typeIsFunction, typeIsString} from "../utils";
+import {Edge, Graph} from './Graph';
+import {typeIsFunction, typeIsString} from '../utils';
 
 export class StateMachine {
   private _graph: Graph;
@@ -13,7 +13,7 @@ export class StateMachine {
     this._previousState = this._currentState;
     this._currentState = state;
 
-    if (!typeIsFunction(this[`onstatechange`])) return;
+    if (!typeIsFunction(this['onstatechange'])) return;
 
     this.onstatechange(this._currentState, this._previousState);
   }
@@ -75,6 +75,7 @@ export class StateMachine {
    * @param state
    * @param oldState
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onstatechange(state: string, oldState: string): void {
   //  todo
   }

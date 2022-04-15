@@ -1,6 +1,13 @@
 import {typeIsString, typeIsFalse, typeIsFunction} from './TypeUtils';
 import {randomString} from './RandomUtils';
-import * as worker_threads from 'worker_threads';
+/**
+ * why: https://stackoverflow.com/questions/52581441/ignoring-specific-requires-in-webpack
+ */
+// import * as worker_threads from 'worker_threads';
+let worker_threads: {isMainThread?: boolean} = {};
+if (typeof Worker === 'undefined') {
+  worker_threads = eval('require')('worker_threads');
+}
 
 export const isBrowser = typeof window !== 'undefined';
 

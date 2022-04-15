@@ -19,12 +19,9 @@ describe('[class: TaskManager] usage case', function () {
       const fn1 = jest.fn();
       taskManagerInstance.addTask('test1', fn1, {interval: 1000});
 
-      await new Promise<void>((resolve) => {
-        setTimeout(() => {
-          expect(fn1).toHaveBeenCalledTimes(2);
-          resolve();
-        }, 2100);
-      });
+      await new Promise<void>((resolve) => setTimeout(resolve, 2900));
+
+      expect(fn1).toHaveBeenCalledTimes(2);
     });
   });
 });

@@ -9,6 +9,7 @@
   "directories": {
     "test": "test"
   },
+  "sideEffects": false,
   "scripts": {
     "prepare": "husky install",
     "test": "gulp test",

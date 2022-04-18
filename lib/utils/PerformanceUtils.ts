@@ -1,14 +1,6 @@
 import {EnvironmentType, environmentType} from './PlatformUtils';
 import {typeIsFunction, typeIsNumber} from './TypeUtils';
-/**
- * why: https://stackoverflow.com/questions/52581441/ignoring-specific-requires-in-webpack
- */
-// import {performance} from 'perf_hooks';
-if (typeof performance === 'undefined') {
-  performance = eval('require')('perf_hooks').performance;
-} else {
-  performance = window.performance;
-}
+import {performance} from 'perf_hooks';
 
 const markPointMap: Map<string, Record<number, number>> = new Map<string, Record<number, number>>();
 

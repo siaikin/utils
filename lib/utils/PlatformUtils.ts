@@ -1,13 +1,6 @@
 import {typeIsString, typeIsFalse, typeIsFunction} from './TypeUtils';
 import {randomString} from './RandomUtils';
-/**
- * why: https://stackoverflow.com/questions/52581441/ignoring-specific-requires-in-webpack
- */
-// import * as worker_threads from 'worker_threads';
-let worker_threads: {isMainThread?: boolean} = {};
-if (typeof Worker === 'undefined') {
-  worker_threads = eval('require')('worker_threads');
-}
+import * as worker_threads from 'worker_threads';
 
 export const isBrowser = typeof window !== 'undefined';
 
@@ -31,7 +24,7 @@ function getEnvironmentType(): EnvironmentType {
         hasGlobal = typeof global !== 'undefined',
         hasWx = typeof wx !== 'undefined' && typeIsFunction(wx.createLivePusherContext),
         hasSelf = typeof self !== 'undefined',
-        _isMainThread = typeof worker_threads.isMainThread === 'boolean' ? worker_threads.isMainThread : false;
+        _isMainThread = worker_threads.isMainThread || false;
   let _environmentType: EnvironmentType = EnvironmentType.UNKNOWN;
 
   if (hasWindow && !hasGlobal && !hasWx) _environmentType = EnvironmentType.BROWSER;

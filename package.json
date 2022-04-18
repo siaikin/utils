@@ -69,5 +69,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "browser": {
+    "worker_threads": false,
+    "perf_hooks": false
   }
 }

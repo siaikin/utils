@@ -1,4 +1,4 @@
-import {format} from 'format';
+import * as _format from 'format';
 import {notUAN, typeIsNumber, typeIsString} from '../utils';
 import {LoggerLevel} from './LoggerLevel';
 
@@ -123,7 +123,7 @@ export class Reporter {
    * @param args - 格式化参数
    */
   log(level: LoggerLevel, formatStr: string, ...args : Array<unknown>): string {
-    const log = format(...[`${formatStr}`, ...args]);
+    const log = _format.format(...[`${formatStr}`, ...args]);
     this.onlog(log, level, this.className, this.instanceName, formatStr, ...args);
 
     return log;

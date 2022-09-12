@@ -166,6 +166,45 @@ export class EventTarget<T = never> implements IEventTarget<T> {
   }
 
   /**
+   * 等待直到监听的事件被分发
+   * @param type - 等待的事件类型
+   *
+   * @return 返回一个 {@link Promise} 对象, 当指定事件被触发时, {@link Promise} 将被 `resolve`. 当 监听 `error` 类型的事件时, {@link Promise} 会被 `reject`, 而不是 `resolve`.
+   */
+  async waitEvent<D extends keyof T>(type: D): Promise<GetEventListenerParametersType<T, D>>
+  {
+    if (!typeIs(type, TYPE.String, TYPE.Number)) throw new Error();
+
+    return new Promise<GetEventListenerParametersType<T, D>>((resolve, reject) => {
+      const func: EventListenerType<T, D> = (event, removeSelf) => {
+        console.log(event);
+        if (event.type === 'error') {
+          reject((event as IErrorEvent<T, D>).error);
+        } else {
+          resolve((event as IEvent<T, D>).message.data);
+        }
+
+        removeSelf();
+      };
+
+      //  绑定监听器函数的可选项到函数对象上
+      const funcObj: IEventListenerObject<T, D> = {
+        listenerOptions: {
+          ...EventTarget.DEFAULT_EVENT_LISTENER_OPTIONS,
+          once: true,
+        },
+        removeSelf: () => this.removeEventListener(type, func),
+        listener: func,
+      };
+
+      if (!typeIsArray(this.listenerMap[type])) {
+        this.listenerMap[type] = [];
+      }
+      this.listenerMap[type].push(funcObj);
+    })
+  }
+
+  /**
    * 指定类型的事件是否被监听
    * @param type
    */

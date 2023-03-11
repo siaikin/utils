@@ -177,7 +177,6 @@ export class EventTarget<T = never> implements IEventTarget<T> {
 
     return new Promise<GetEventListenerParametersType<T, D>>((resolve, reject) => {
       const func: EventListenerType<T, D> = (event, removeSelf) => {
-        console.log(event);
         if (event.type === 'error') {
           reject((event as IErrorEvent<T, D>).error);
         } else {

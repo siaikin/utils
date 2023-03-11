@@ -70,7 +70,7 @@ export function debounce(func: (...args: Array<unknown>) => unknown, delay = 100
       canceled = false;
 
   const deFunc: DebouncedFunction = function (...args: Array<unknown>): void {
-    if (!canceled) return;
+    if (canceled) return;
 
 
     const _arguments = args;

@@ -57,11 +57,11 @@ export function deepMerge<T>(target: T, source: T): T {
   return target;
 }
 
-export interface DebouncedFunction {
-  (...args: Array<unknown>): unknown;
+export interface DebouncedFunction<FUNC extends (...args: Array<any>) => any> {
+  (...args: Parameters<FUNC>): void;
   cancel(): void;
 }
-export function debounce(func: (...args: Array<unknown>) => unknown, delay = 1000): DebouncedFunction {
+export function debounce<FUNC extends (...args: Array<any>) => any>(func: FUNC, delay = 1000): DebouncedFunction<FUNC> {
   function exec(...args: Array<unknown>) {
     func.apply(this, args);
   }
@@ -69,7 +69,7 @@ export function debounce(func: (...args: Array<unknown>) => unknown, delay = 100
   let timeoutKey: ReturnType<typeof setTimeout> | undefined,
       canceled = false;
 
-  const deFunc: DebouncedFunction = function (...args: Array<unknown>): void {
+  const deFunc: DebouncedFunction<FUNC> = function (...args: Parameters<FUNC>): void {
     if (canceled) return;
 
 
@@ -95,14 +95,14 @@ export function debounce(func: (...args: Array<unknown>) => unknown, delay = 100
   return deFunc;
 }
 
-export function throttle(func: (...args: Array<unknown>) => unknown, interval = 1000): (...args: Array<unknown>) => unknown {
+export function throttle<FUNC extends (...args: Array<any>) => any>(func: FUNC, interval = 1000): (...args: Parameters<FUNC>) => void {
   function exec(...args: Array<unknown>) {
     func.apply(this, args);
   }
 
   let last = 0;
 
-  return function (...args: Array<unknown>): void {
+  return function (...args: Parameters<FUNC>): void {
     const ts = Date.now();
 
     if (ts >= last + interval) {
